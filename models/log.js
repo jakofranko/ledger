@@ -6,7 +6,7 @@ module.exports = {
     create: function(props) {
         return db.open('./log.sqlite')
             .then(() => db.run(
-                "INSERT INTO Logs (goal_id, amount, datetime) VALUES (?, ?, ?, ?, ?)",
+                "INSERT INTO Logs (goal_id, amount, datetime) VALUES (?, ?, ?)",
                 [
                     props.goal_id,
                     props.amount,
