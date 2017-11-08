@@ -23,7 +23,7 @@ INSERT INTO Intervals (id, name) VALUES (2, 'month');
 INSERT INTO Intervals (id, name) VALUES (3, 'year');
 
 INSERT INTO Goals (id, name, unit, amount, category_id, interval_id) VALUES (0, "learn french", "DuoLingo lessons", 3, 0, 0);
-INSERT INTO Logs (goal_id, amount, datetime) VALUES (0, 1, datetime());
+INSERT INTO Logs (goal_id, amount, datetime) VALUES (0, 1, date());
 
 -- Down
 DROP TABLE Categories;
