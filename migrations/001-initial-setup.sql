@@ -7,7 +7,7 @@ CREATE TABLE Goals (
     CONSTRAINT Goals_fk_interval_id FOREIGN KEY (interval_id) REFERENCES Intervals (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE Logs (
-    id INTEGER PRIMARY KEY, goal_id INTEGER, amount INTEGER, datetime TEXT,
+    id INTEGER PRIMARY KEY, description VARCHAR, goal_id INTEGER, amount INTEGER, date VARCHAR, duration FLOAT,
     CONSTRAINT Logs_fk_goal_id FOREIGN KEY (goal_id) REFERENCES Goals (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -23,7 +23,7 @@ INSERT INTO Intervals (id, name) VALUES (2, 'month');
 INSERT INTO Intervals (id, name) VALUES (3, 'year');
 
 INSERT INTO Goals (id, name, unit, amount, category_id, interval_id) VALUES (0, "learn french", "DuoLingo lessons", 3, 0, 0);
-INSERT INTO Logs (goal_id, amount, datetime) VALUES (0, 1, date());
+INSERT INTO Logs (description, goal_id, amount, date, duration) VALUES ('Did a few lessons', 0, 1, date(), 0.5);
 
 -- Down
 DROP TABLE Categories;

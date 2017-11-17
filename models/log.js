@@ -6,11 +6,13 @@ module.exports = {
     create: function(props) {
         return db.open('./log.sqlite')
             .then(() => db.run(
-                "INSERT INTO Logs (goal_id, amount, datetime) VALUES (?, ?, ?)",
+                "INSERT INTO Logs (description, goal_id, amount, date, duration) VALUES (?, ?, ?, ?, ?)",
                 [
+                    props.description,
                     props.goal_id,
                     props.amount,
-                    props.datetime
+                    props.date,
+                    props.duration
                 ]
             ))
             .then(stmt => db.get("SELECT * FROM Logs WHERE id = ?", [stmt.lastID]))
@@ -23,11 +25,13 @@ module.exports = {
     },
     update: function(id, updates) {
         return db.open('./log.sqlite')
-            .then(() => db.run("UPDATE Logs SET goal_id = ?, amount = ?, datetime = ? WHERE id = ?",
+            .then(() => db.run("UPDATE Logs SET description = ?, goal_id = ?, amount = ?, date = ?, duration = ? WHERE id = ?",
                 [
+                    updates.description,
                     updates.goal_id,
                     updates.amount,
-                    updates.datetime,
+                    updates.date,
+                    updates.duration,
                     id
                 ]
             ))
@@ -38,6 +42,8 @@ module.exports = {
         return db.open('./log.sqlite')
             .then(() => this.get(id))
             .then(category => {
+
+
                 cat = category;
                 return db.run("DELETE FROM Logs WHERE id = ?", [id]);
             })
