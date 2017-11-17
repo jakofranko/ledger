@@ -7,10 +7,9 @@ var bodyParser    = require('body-parser');
 var db            = require('sqlite');
 
 db.open('./log.sqlite');
-// db.migrate({ force: 'last' });
+// db.migrate({ force: 'last' }); // WILL DELETE EVERYTHING IN THE DB AND RUN ALL MIGRATIONS TILL LATEST
 
 var index       = require('./routes/index');
-var users       = require('./routes/users');
 var categories  = require('./routes/categories');
 var intervals   = require('./routes/intervals');
 var goals       = require('./routes/goals');
@@ -50,7 +49,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/categories', categories);
 app.use('/intervals', intervals);
 app.use('/goals', goals);
