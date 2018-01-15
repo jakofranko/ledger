@@ -14,6 +14,7 @@ var categories  = require('./routes/categories');
 var intervals   = require('./routes/intervals');
 var goals       = require('./routes/goals');
 var logs       = require('./routes/logs');
+var milestones = require('./routes/milestones');
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use('/categories', categories);
 app.use('/intervals', intervals);
 app.use('/goals', goals);
 app.use('/logs', logs);
+app.use('/milestones', milestones);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

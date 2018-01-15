@@ -10,6 +10,10 @@ CREATE TABLE Logs (
     id INTEGER PRIMARY KEY, description VARCHAR, goal_id INTEGER, amount INTEGER, date VARCHAR, duration FLOAT,
     CONSTRAINT Logs_fk_goal_id FOREIGN KEY (goal_id) REFERENCES Goals (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+CREATE TABLE Milestones (
+    id INTEGER PRIMARY KEY, goal_id INTEGER, name VARCHAR,
+    CONSTRAINT Milestones_fk_goal_id FOREIGN KEY (goal_id) REFERENCES Goals (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 INSERT INTO Categories (id, name) VALUES (0, 'linguistics');
 INSERT INTO Categories (id, name) VALUES (1, 'family');
@@ -30,3 +34,4 @@ DROP TABLE Categories;
 DROP TABLE Intervals;
 DROP TABLE Goals;
 DROP TABLE Logs;
+DROP TABLE Milestones;
