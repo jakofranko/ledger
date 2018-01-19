@@ -9,6 +9,20 @@ router.get('/', function(req, res, next) {
         .catch(err => next(err));
 });
 
+router.get('/done', function(req, res, next) {
+    Milestones
+        .getDone()
+        .then(milestones => res.json({ milestones }))
+        .catch(err => next(err));
+});
+
+router.get('/not-done', function(req, res, next) {
+    Milestones
+        .getNotDone()
+        .then(milestones => res.json({ milestones }))
+        .catch(err => next(err));
+});
+
 router.post('/', function(req, res, next) {
     Milestones
         .create(req.body)

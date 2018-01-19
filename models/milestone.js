@@ -6,7 +6,7 @@ module.exports = {
     create: function(props) {
         return db.open('./log.sqlite')
             .then(() => db.run(
-                "INSERT INTO Milestones (goal_id, name) VALUES (?, ?)",
+                "INSERT INTO Milestones (goal_id, name, done) VALUES (?, ?, 0)", // default done to 0
                 [
                     props.goal_id,
                     props.name
@@ -20,12 +20,19 @@ module.exports = {
     getAll: function() {
         return db.open('./log.sqlite').then(() => db.all('SELECT * FROM Milestones'));
     },
+    getDone: function() {
+        return db.open('./log.sqlite').then(() => db.all('SELECT * FROM Milestones WHERE done = 1'));
+    },
+    getNotDone: function() {
+        return db.open('./log.sqlite').then(() => db.all('SELECT * FROM Milestones WHERE done = 0'));
+    },
     update: function(id, updates) {
         return db.open('./log.sqlite')
-            .then(() => db.run("UPDATE Milestones SET goal_id = ?, name = ? WHERE id = ?",
+            .then(() => db.run("UPDATE Milestones SET goal_id = ?, name = ?, done = ? WHERE id = ?",
                 [
                     updates.goal_id,
                     updates.name,
+                    Number(updates.done),
                     id
                 ]
             ))
