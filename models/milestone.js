@@ -28,11 +28,12 @@ module.exports = {
     },
     update: function(id, updates) {
         return db.open('./log.sqlite')
-            .then(() => db.run("UPDATE Milestones SET goal_id = ?, name = ?, done = ? WHERE id = ?",
+            .then(() => db.run("UPDATE Milestones SET goal_id = ?, name = ?, done = ?, date = ? WHERE id = ?",
                 [
                     updates.goal_id,
                     updates.name,
                     Number(updates.done),
+                    updates.date,
                     id
                 ]
             ))
