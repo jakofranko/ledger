@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=log:* nodemon ./bin/www"
+    "start": "DEBUG=log:* nodemon ./bin/www",
+    "test": "mocha --recursive"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -17,6 +18,7 @@
     "sqlite": "^2.8.0"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "nodemon": "^1.12.1"
   }
 }
