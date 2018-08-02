@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=log:* nodemon ./bin/www",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive --reporter=list"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
