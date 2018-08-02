@@ -6,16 +6,20 @@ let TEST_GOAL;
 describe('Goal model', function() {
     beforeEach('insert a test goal', function(done) {
         const g = Goal;
-        g.create({ name: GOAL_NAME })
-            .then(goal => {
+        g.create({
+            name: GOAL_NAME,
+            unit: 'test goal',
+            amount: 1,
+            interval_id: 0,
+            category_id: 0
+
+        }).then(goal => {
                 TEST_GOAL = goal;
                 assert(goal);
+                done();
             })
             .catch(err => {
                 assert.fail(err);
-            })
-            .finally(() => {
-                g.close();
                 done();
             });
     });
@@ -32,16 +36,15 @@ describe('Goal model', function() {
                 Promise.all(deletePromises)
                     .then(function(deleteResults) {
                         assert(deleteResults.length);
+                        done();
                     })
                     .catch(err => {
                         assert.fail(err);
+                        done();
                     });
             })
             .catch(err => {
                 assert.fail(err);
-            })
-            .finally(() => {
-                g.close();
                 done();
             });
     });
@@ -54,28 +57,24 @@ describe('Goal model', function() {
                 goals.forEach(goal => {
                     assert(goal.name);
                 });
+                done();
             })
             .catch(err => {
                 assert.fail(err);
-            })
-            .finally(() => {
-                g.close();
                 done();
             });
 
     });
 
-    it('should get a single cateogry', function(done) {
+    it('should get a single goal', function(done) {
         const g = Goal;
         g.get(0)
             .then(goal => {
-                assert(goal.name);
+                assert(goal[0].name);
+                done();
             })
             .catch(err => {
                 assert.fail(err);
-            })
-            .finally(() => {
-                g.close();
                 done();
             });
     });
