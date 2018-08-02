@@ -3,58 +3,53 @@ var router  = express.Router();
 var Category = require('../models/category');
 
 router.get('/', function(req, res, next) {
-   new Category()
-        .getAll()
-        .then(categories => res.json({ categories }))
-        .catch(err => next(err))
-        .close();
+   let category = new Category();
+    category.getAll()
+        .then(categories => {
+            category.close();
+            res.json({ categories });
+        })
+        .catch(err => next(err));
 });
 
 router.post('/', function(req, res, next) {
-    new Category()
-        .create(req.body)
-        .then(category => res.json(category))
-        .catch(err => next(err))
-        .close();
+    let category = new Category();
+    category.create(req.body)
+        .then(category => {
+            category.close();
+            res.json(category);
+        })
+        .catch(err => next(err));
 });
 
 router.get('/:id', function(req, res, next) {
-    console.log("==========");
-    console.log("Body: ", req.body);
-    console.log("==========");
-    console.log("Params: ", req.params);
-    console.log("==========");
-    new Category()
-        .get(req.params.id)
-        .then(category => res.json(category))
-        .catch(err => next(err))
-        .close();
+    let category = new Category();
+    category.get(req.params.id)
+        .then(category => {
+            category.close();
+            res.json(category);
+        })
+        .catch(err => next(err));
 });
 
 router.put('/:id', function(req, res, next) {
-    console.log("==========");
-    console.log("Body: ", req.body);
-    console.log("==========");
-    console.log("Params: ", req.params);
-    console.log("==========");
-    new Category()
-        .update(req.params.id, req.body)
-        .then(category => res.json(category))
-        .catch(err => next(err))
-        .close();
+    let category = new Category();
+    category.update(req.params.id, req.body)
+        .then(category => {
+            category.close();
+            res.json(category);
+        })
+        .catch(err => next(err));
 });
 
 router.delete('/:id', function(req, res, next) {
-    console.log("==========");
-    console.log("Body: ", req.body);
-    console.log("==========");
-    console.log("Params: ", req.params);
-    console.log("==========");
-    new Category()
-        .delete(req.params.id)
-        .then(category => res.json(category))
-        .catch(err => next(err))
-        .close();
+    let category = new Category();
+    category.delete(req.params.id)
+        .then(category => {
+            category.close();
+            res.json(category)
+        })
+        .catch(err => next(err));
 });
 
 module.exports = router;
