@@ -37,13 +37,13 @@ Categories.prototype.create = function(props) {
 },
 Categories.prototype.get = function(id) {
     return new Promise((resolve, reject) => {
-        this.db.all('SELECT * FROM Categories WHERE id = ?', id, function(err, r) {
+        this.db.get('SELECT * FROM Categories WHERE id = ?', id, function(err, r) {
             if (err) {
                 console.error("Error fetching categories with id '" + id + "'");
                 reject(err);
             }
 
-            resolve(r[0]);
+            resolve(r);
         });
     });
 
