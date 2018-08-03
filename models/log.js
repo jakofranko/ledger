@@ -38,15 +38,13 @@ module.exports = {
             .then(() => db.get("SELECT * FROM Logs WHERE id = ?", [id]));
     },
     delete: function(id) {
-        let cat;
+        let l;
         return db.open('./log.sqlite')
             .then(() => this.get(id))
-            .then(category => {
-
-
-                cat = category;
+            .then(log => {
+                l = log;
                 return db.run("DELETE FROM Logs WHERE id = ?", [id]);
             })
-            .then(() => Promise.resolve(cat));
+            .then(() => Promise.resolve(l));
     }
 };
