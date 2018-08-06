@@ -18,10 +18,12 @@ describe('Log model', function() {
         .then(log => {
             assert(log.description === TEST_LOG.description);
             TEST_LOG_ID = log.id;
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            l.close();
             done();
         });
     });
@@ -47,9 +49,11 @@ describe('Log model', function() {
             let testLogs = logs.filter(log => log.description === TEST_LOG.description || log.description === UPDATED_DESCRIPTION);
             return deleteLogs(testLogs);
         })
-        .then(() => done())
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            l.close();
             done();
         })
     });
@@ -59,10 +63,12 @@ describe('Log model', function() {
         l.get(TEST_LOG_ID)
         .then(log => {
             assert(log[0] && log[0].description === TEST_LOG.description);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            l.close();
             done();
         });
     });
@@ -77,10 +83,12 @@ describe('Log model', function() {
             assert(logs[0].goal_id !== undefined);
             assert(logs[0].duration !== undefined);
             assert(logs[0].date);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            l.close();
             done();
         });
     });
@@ -90,10 +98,12 @@ describe('Log model', function() {
         l.update(TEST_LOG_ID, Object.assign(TEST_LOG, { description: UPDATED_DESCRIPTION }))
         .then(updatedLog => {
             assert(updatedLog && updatedLog.description === UPDATED_DESCRIPTION);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            l.close();
             done();
         });
     });
