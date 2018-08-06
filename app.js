@@ -3,10 +3,6 @@ var path          = require('path');
 var logger        = require('morgan');
 var cookieParser  = require('cookie-parser');
 var bodyParser    = require('body-parser');
-var db            = require('sqlite');
-
-db.open('./log.sqlite');
-// db.migrate({ force: 'last' }); // WILL DELETE EVERYTHING IN THE DB AND RUN ALL MIGRATIONS TILL LATEST
 
 var index       = require('./routes/index');
 var categories  = require('./routes/categories');
