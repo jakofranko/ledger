@@ -37,7 +37,7 @@ Log.prototype.create = function(props) {
 };
 Log.prototype.get = function(id) {
     return new Promise((resolve, reject) => {
-        this.db.all('SELECT * FROM Logs WHERE id = ?', id, function(err, rows) {
+        this.db.get('SELECT * FROM Logs WHERE id = ?', id, function(err, rows) {
             if (err) reject(err);
             else resolve(rows);
         });

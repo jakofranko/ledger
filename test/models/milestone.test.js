@@ -64,7 +64,7 @@ describe('Milestone model', function() {
         const m = new Milestone();
         m.get(TEST_MILESTONE_ID)
         .then(milestone => {
-            assert(milestone[0] && milestone[0].name === TEST_MILESTONE.name);
+            assert(milestone && milestone.name === TEST_MILESTONE.name);
         })
         .catch(err => {
             assert.fail(err);

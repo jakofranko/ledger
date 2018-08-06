@@ -62,7 +62,7 @@ describe('Log model', function() {
         const l = new Log();
         l.get(TEST_LOG_ID)
         .then(log => {
-            assert(log[0] && log[0].description === TEST_LOG.description);
+            assert(log && log.description === TEST_LOG.description);
         })
         .catch(err => {
             assert.fail(err);

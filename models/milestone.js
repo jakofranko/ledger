@@ -34,9 +34,9 @@ Milestone.prototype.create = function (props) {
 };
 Milestone.prototype.get = function (id) {
     return new Promise((resolve, reject) => {
-        this.db.all('SELECT * FROM Milestones WHERE id = ?', id, function(err, rows) {
+        this.db.get('SELECT * FROM Milestones WHERE id = ?', id, function(err, row) {
             if (err) reject(err);
-            else resolve(rows);
+            else resolve(row);
         });
     });
 };

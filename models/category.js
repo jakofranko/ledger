@@ -30,10 +30,6 @@ Categories.prototype.create = function(props) {
             });
         });
     });
-
-    // return db.open('./log.sqlite')
-    //     .then(() => db.run("INSERT INTO Categories (name) VALUES (?)", [props.name]))
-    //     .then(stmt => db.get("SELECT * FROM Categories WHERE id = ?", [stmt.lastID]))
 },
 Categories.prototype.get = function(id) {
     return new Promise((resolve, reject) => {
@@ -46,8 +42,6 @@ Categories.prototype.get = function(id) {
             resolve(r);
         });
     });
-
-    // return db.open('./log.sqlite').then(() => db.all('SELECT * FROM Categories WHERE id = ?', [id]));
 },
 Categories.prototype.getAll = function() {
     return new Promise((resolve, reject) => {
@@ -60,8 +54,6 @@ Categories.prototype.getAll = function() {
             resolve(r);
         });
     });
-
-    // return db.open('./log.sqlite').then(() => db.all('SELECT * FROM Categories'));
 },
 Categories.prototype.update = function(id, updates) {
     return new Promise((resolve, reject) => {
@@ -80,10 +72,6 @@ Categories.prototype.update = function(id, updates) {
             resolve(row);
         });
     });
-
-    // return db.open('./log.sqlite')
-    //     .then(() => db.run("UPDATE Categories SET name = ? WHERE id = ?", [updates.name, id]))
-    //     .then(() => db.get("SELECT * FROM Categories WHERE id = ?", [id]));
 },
 Categories.prototype.delete = function(id) {
     return new Promise((resolve, reject) => {
@@ -98,16 +86,6 @@ Categories.prototype.delete = function(id) {
             resolve(category);
         });
     });
-
-    // let cat;
-    //
-    // return db.open('./log.sqlite')
-    //     .then(() => this.get(id))
-    //     .then(category => {
-    //         cat = category;
-    //         return db.run("DELETE FROM Categories WHERE id = ?", [id]);
-    //     })
-    //     .then(() => Promise.resolve(cat));
 }
 
 module.exports = Categories;
