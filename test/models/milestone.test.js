@@ -20,10 +20,13 @@ describe('Milestone model', function() {
         .then(milestone => {
             assert(milestone.name === TEST_MILESTONE.name);
             TEST_MILESTONE_ID = milestone.id;
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
+            done();
         });
     });
 
@@ -48,9 +51,11 @@ describe('Milestone model', function() {
             let testMilestones = milestones.filter(milestone => milestone.name === TEST_MILESTONE.name || milestone.name === UPDATED_MILESTONE.name);
             return deleteMilestones(testMilestones);
         })
-        .then(() => done())
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
             done();
         })
     });
@@ -60,10 +65,12 @@ describe('Milestone model', function() {
         m.get(TEST_MILESTONE_ID)
         .then(milestone => {
             assert(milestone[0] && milestone[0].name === TEST_MILESTONE.name);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
             done();
         });
     });
@@ -77,10 +84,12 @@ describe('Milestone model', function() {
             assert(milestones[0].done !== undefined);
             assert(milestones[0].goal_id !== undefined);
             assert(milestones[0].date !== undefined);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
             done();
         });
     });
@@ -95,10 +104,12 @@ describe('Milestone model', function() {
                     assert(c.done === 1);
                 });
 
-                done();
             })
             .catch(err => {
                 assert.fail(err);
+            })
+            .finally(() => {
+                m.close();
                 done();
             });
         });
@@ -112,11 +123,12 @@ describe('Milestone model', function() {
             incomplete.forEach(c => {
                 assert(c.done === 0);
             });
-
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
             done();
         });
     });
@@ -129,10 +141,12 @@ describe('Milestone model', function() {
             assert(updatedMilestone && updatedMilestone.done === UPDATED_MILESTONE.done);
             assert(updatedMilestone && updatedMilestone.date === UPDATED_MILESTONE.date);
             assert(updatedMilestone && updatedMilestone.goal_id === UPDATED_MILESTONE.goal_id);
-            done();
         })
         .catch(err => {
             assert.fail(err);
+        })
+        .finally(() => {
+            m.close();
             done();
         });
     });
