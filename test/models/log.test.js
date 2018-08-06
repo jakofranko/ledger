@@ -13,7 +13,7 @@ let TEST_LOG_ID;
 
 describe('Log model', function() {
     beforeEach('a test log should be created', function(done) {
-        const l = Log;
+        const l = new Log();
         l.create(TEST_LOG)
         .then(log => {
             assert(log.description === TEST_LOG.description);
@@ -22,11 +22,12 @@ describe('Log model', function() {
         })
         .catch(err => {
             assert.fail(err);
+            done();
         });
     });
 
     afterEach('all test logs should be deleted', function(done) {
-        const l = Log;
+        const l = new Log();
         function deleteLogs(queue) {
             return new Promise((resolve, reject) => {
                 let currentLog;
@@ -54,7 +55,7 @@ describe('Log model', function() {
     });
 
     it('should get a single log', function(done) {
-        const l = Log;
+        const l = new Log();
         l.get(TEST_LOG_ID)
         .then(log => {
             assert(log[0] && log[0].description === TEST_LOG.description);
@@ -67,7 +68,7 @@ describe('Log model', function() {
     });
 
     it('should get all logs', function(done) {
-        const l = Log;
+        const l = new Log();
         l.getAll()
         .then(logs => {
             assert(logs.length);
@@ -85,7 +86,7 @@ describe('Log model', function() {
     });
 
     it('should update a single log', function(done) {
-        const l = Log;
+        const l = new Log();
         l.update(TEST_LOG_ID, Object.assign(TEST_LOG, { description: UPDATED_DESCRIPTION }))
         .then(updatedLog => {
             assert(updatedLog && updatedLog.description === UPDATED_DESCRIPTION);
