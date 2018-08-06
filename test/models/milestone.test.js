@@ -15,7 +15,7 @@ let TEST_MILESTONE_ID;
 
 describe('Milestone model', function() {
     beforeEach('a test milestone should be created', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.create(TEST_MILESTONE)
         .then(milestone => {
             assert(milestone.name === TEST_MILESTONE.name);
@@ -28,7 +28,7 @@ describe('Milestone model', function() {
     });
 
     afterEach('all test milestones should be deleted', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         function deleteMilestones(queue) {
             return new Promise((resolve, reject) => {
                 let currentMilestone;
@@ -56,7 +56,7 @@ describe('Milestone model', function() {
     });
 
     it('should get a single milestone', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.get(TEST_MILESTONE_ID)
         .then(milestone => {
             assert(milestone[0] && milestone[0].name === TEST_MILESTONE.name);
@@ -69,7 +69,7 @@ describe('Milestone model', function() {
     });
 
     it('should get all milestones', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.getAll()
         .then(milestones => {
             assert(milestones.length);
@@ -86,7 +86,7 @@ describe('Milestone model', function() {
     });
 
     it('should get all milestones that are done', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.update(TEST_MILESTONE_ID, UPDATED_MILESTONE).then(ms => {
             m.getDone()
             .then(completed => {
@@ -105,7 +105,7 @@ describe('Milestone model', function() {
     });
 
     it('should get all milestones that are not done', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.getNotDone()
         .then(incomplete => {
             assert(incomplete.length);
@@ -122,7 +122,7 @@ describe('Milestone model', function() {
     });
 
     it('should update a single milestone', function(done) {
-        const m = Milestone;
+        const m = new Milestone();
         m.update(TEST_MILESTONE_ID, UPDATED_MILESTONE)
         .then(updatedMilestone => {
             assert(updatedMilestone && updatedMilestone.name === UPDATED_MILESTONE.name);
