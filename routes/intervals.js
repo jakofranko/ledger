@@ -1,20 +1,12 @@
-var express = require('express');
-var router  = express.Router();
-var Promise = require('bluebird');
-var db      = require('sqlite');
-
-
+const express = require('express');
+const router  = express.Router();
+const Interval = require('../models/interval');
 
 router.get('/', function(req, res, next) {
-    try {
-        db.open('./log.sqlite')
-            .then(() => db.all('SELECT * FROM Intervals'))
+    const interval = new Interval();
+    interval.getAll()
             .then(intervals => res.json({ intervals }))
             .catch(err => next(err));
-    } catch(e) {
-        res.send(e);
-    }
-
 });
 
 module.exports = router;
