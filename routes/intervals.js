@@ -5,8 +5,9 @@ const Interval = require('../models/interval');
 router.get('/', function(req, res, next) {
     const interval = new Interval();
     interval.getAll()
-            .then(intervals => res.json({ intervals }))
-            .catch(err => next(err));
+    .then(intervals => res.json({ intervals }))
+    .catch(err => next(err))
+    .finally(() => interval.close());
 });
 
 module.exports = router;
