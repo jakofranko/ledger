@@ -76,7 +76,6 @@ Categories.prototype.update = function(id, updates) {
 Categories.prototype.delete = function(id) {
     return new Promise((resolve, reject) => {
         let category = this.get(id);
-        this.db.serialize();
         this.db.run("DELETE FROM Categories WHERE id = ?", id, function(err) {
             if (err) {
                 console.log("Problem deleting row '" + id + "'");
